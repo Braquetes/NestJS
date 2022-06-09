@@ -27,5 +27,4 @@ export class TareaController {
     deleteHomework(@Param('id') id:string){
         return `Eliminando Tarea con ID: ${id}`;
     }
-    
 }
