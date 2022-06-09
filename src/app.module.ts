@@ -1,10 +1,10 @@
-import { Tarea } from './tarea/entities/tarea.entity';
+import { TareaEntity } from './tarea/entities/tarea.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TareaModule } from './tarea/tarea.module';
-import { TareaService } from './tarea/services/tarea/tarea.service';
+import { TareaService } from './tarea/providers/tarea/tarea.service';
 
 @Module({
   imports: [
@@ -19,7 +19,6 @@ import { TareaService } from './tarea/services/tarea/tarea.service';
       entities: [__dirname+'/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    Tarea
   ],
   controllers: [AppController],
   providers: [AppService, TareaService],
