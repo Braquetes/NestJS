@@ -1,10 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CrearTarea } from './DTO/crear-tarea';
+import { TareaService } from './providers/tarea/tarea.service';
 
 @Controller('tarea')
 export class TareaController {
+    constructor(private TS: TareaService){}
     @Get()
     getHomeworks(): string {
+        // this.TS.getAllTarea();
         return 'Todas las tareas';
     }
 
@@ -15,7 +18,8 @@ export class TareaController {
 
     @Post()
     createHomework(@Body() homework: CrearTarea){
-        return 'Creando Tarea';
+        return this.TS.createTarea(homework);
+        // return 'Creando Tarea';
     }
 
     @Put(':id')

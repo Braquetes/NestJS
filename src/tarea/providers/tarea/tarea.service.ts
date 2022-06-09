@@ -14,7 +14,7 @@ export class TareaService {
         return await this.tarea.find;
     }
 
-    async CrearTarea(tareaNueva: CrearTarea){
+    async createTarea(tareaNueva: CrearTarea){
         const newTarea = new TareaEntity();
         newTarea.nombre = tareaNueva.nombre;
         newTarea.descripcion = tareaNueva.descripcion;
@@ -22,5 +22,19 @@ export class TareaService {
         newTarea.tipo = tareaNueva.tipo;
 
         this.tarea.save(newTarea)
+    }
+
+    async updateTarea(editTarea: CrearTarea){
+        const updateTarea = await this.tarea.findOne();
+        updateTarea.nombre = editTarea.nombre;
+        updateTarea.descripcion = editTarea.descripcion;
+        updateTarea.fecha = editTarea.fecha;
+        updateTarea.tipo = editTarea.tipo;
+
+        return this.tarea.update(1,updateTarea);
+    }
+
+    async deleteTarea(idTarea: any){
+        return this.tarea.delete(idTarea);
     }
 }
