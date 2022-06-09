@@ -12,13 +12,14 @@ export class TareaController {
     }
 
     @Get(':id')
-    getOneHomework(@Param('id') id: string):string {
-        return `Tarea con ID: ${id}`; 
+    getOneHomework(@Param('id') id: any):any {
+        return this.TS.getOne(id);
+        // return `Tarea con ID: ${id}`;
     }
 
     @Post()
     createHomework(@Body() homework: CrearTarea){
-        return this.TS.createTarea(homework);
+        return this.TS.createTarea(homework) + 'Creado';
         // return 'Creando Tarea';
     }
 

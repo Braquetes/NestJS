@@ -14,6 +14,10 @@ export class TareaService {
         return await this.tarea.find;
     }
 
+    async getOne(id: any){
+        return await this.tarea.findOne(id);
+      }
+
     async createTarea(tareaNueva: CrearTarea){
         const newTarea = new TareaEntity();
         newTarea.nombre = tareaNueva.nombre;
