@@ -11,7 +11,7 @@ export class UsersService {
         private user: Repository<UserEntity>){}
 
     async getAllUsers(){
-        return await this.user.find();
+        return await this.user.find({relations: ['tarea']});
     }
 
     async getOne(id: any){
