@@ -1,3 +1,4 @@
+import { UserEntity } from 'src/users/entities/user.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CrearTarea } from 'src/tarea/DTO/crear-tarea';
@@ -8,7 +9,9 @@ import { Repository } from 'typeorm';
 export class TareaService {
     constructor(
         @InjectRepository(TareaEntity)    
-        private tarea: Repository<TareaEntity>){}
+        private tarea: Repository<TareaEntity>,
+        @InjectRepository(UserEntity)
+        private user: Repository<UserEntity>){}
 
     async getAllTarea(){
         return await this.tarea.find();
@@ -20,6 +23,8 @@ export class TareaService {
 
     async createTarea(tareaNueva: CrearTarea){
         const newTarea = new TareaEntity();
+        const users = await this.user.findOne({ id: tareaNueva.userId });
+        newTarea.user = users;
         newTarea.nombre = tareaNueva.nombre;
         newTarea.descripcion = tareaNueva.descripcion;
         newTarea.fecha = tareaNueva.fecha;
