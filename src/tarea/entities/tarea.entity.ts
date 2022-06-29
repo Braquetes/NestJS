@@ -1,3 +1,4 @@
+import { CategoriaEntity } from "src/categorias/entities/categoria.entity";
 import { UserEntity } from "src/users/entities/user.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -15,6 +16,12 @@ export class TareaEntity{
     fecha: string;
     @Column()
     tipo: number;
-    @ManyToOne(()=>UserEntity,user=>user.tarea)
+    @ManyToOne(()=>UserEntity,user=>user.tarea, {
+        onDelete: 'SET NULL'
+    })
     user: UserEntity;
+    @ManyToOne(()=>CategoriaEntity,categoria=>categoria.tarea,{
+        onDelete: 'SET NULL'
+    })
+    categoria: CategoriaEntity;
 }

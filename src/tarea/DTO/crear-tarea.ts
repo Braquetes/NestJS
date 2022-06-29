@@ -5,5 +5,6 @@ export class CrearTarea {
     descripcion: string;
     fecha: string;
     tipo: number;
-    userId:  FindCondition<number>
+    userId:  FindCondition<number>;
+    categoriaId:  FindCondition<number>;
 }

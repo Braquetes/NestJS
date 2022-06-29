@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { UserDto } from './DTO/users.dto';
+import { UserDto } from './DTO/user.dto';
 import { UserEntity } from './entities/user.entity';
 import { UsersService } from './providers/users/users.service';
 
@@ -18,21 +18,30 @@ export class UsersController {
         return rows;
     }
 
+    @Post('/login')
+    login(@Body() login: any): any {
+        const rows = this.US.login(login);
+        return rows;
+    }
+
     @Post()
     createHomework(@Body() homework: UserDto) {
         this.US.createUser(homework);
-        return 'Creando User';
+        // return 'Creando User';
+        return `{"message": "Correct"}`;
     }
 
     @Put(':id')
     UpdateHomework(@Param('id') id: string, @Body() updBody: UserDto) {
         this.US.updateUser(id, updBody);
-        return `Actualizando User con ID: ${id}`;
+        // return `Actualizando User con ID: ${id}`;
+        return `{"message": "Correct"}`;
     }
 
     @Delete(':id')
     deleteHomework(@Param('id') id: string) {
         this.US.deleteUser(id);
-        return `User eliminado con el ID: ${id}`;
+        // return `User eliminado con el ID: ${id}`;
+        return `{"message": "Correct"}`;
     }
 }
